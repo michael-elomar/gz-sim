@@ -2,7 +2,7 @@
 LOCAL_PATH := $(call my-dir)
 
 ################################################################################
-# gazebo
+# gz sim
 ################################################################################
 
 include $(CLEAR_VARS)
@@ -20,11 +20,12 @@ LOCAL_LIBRARIES := \
 	gz-sensors \
 	gz-utils \
 	gz-transport \
+	gz-gui \
 	sdformat
 
 LOCAL_CMAKE_CONFIGURE_ARGS := \
 	-DBUILD_TESTING:BOOL=False \
-	-DCMAKE_PREFIX_PATH=$(HOME)/Qt6.10/6.10.0/gcc_64/lib/cmake
+	-DCMAKE_PREFIX_PATH=$(HOME)/Qt/6.9.3/gcc_64/lib/cmake
 
 LOCAL_CMAKE_CONFIGURE_ENV +=\
 	PKG_CONFIG_PATH=$(TARGET_OUT_STAGING)/usr/lib/pkgconfig:$(TARGET_OUT_STAGING)/usr/share/pkgconfig
@@ -36,17 +37,8 @@ LOCAL_CXXFLAGS := \
 	-Wno-cast-function-type \
 	-Wno-misleading-indentation
 
-# LOCAL_EXPORT_C_INCLUDES := $(TARGET_OUT_STAGING)/usr/include/gazebo-11
-# LOCAL_EXPORT_LDLIBS := \
-# 	-lgazebo \
-# 	-lgazebo_rendering \
-# 	-lgazebo_physics \
-# 	-lgazebo_transport \
-# 	-lgazebo_sensors \
-# 	-lgazebo_util \
-# 	-lgazebo_msgs \
-# 	-lgazebo_common \
-# 	-lgazebo_client \
-# 	-ltbb
+LOCAL_EXPORT_C_INCLUDES := $(TARGET_OUT_STAGING)/usr/include/gz/sim10/
+
+LOCAL_EXPORT_LDLIBS := -lgz-sim
 
 include $(BUILD_CMAKE)
